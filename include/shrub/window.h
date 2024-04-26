@@ -2,6 +2,7 @@
 #define SHRUB_WINDOW_H_
 #include "shrub/input.h"
 namespace shrub {
+    struct ___Callback;
     struct Window {
         Window(int width, int height, const char* title);
         ~Window();
@@ -27,8 +28,8 @@ namespace shrub {
         bool is_key_pressed(Key key) const;
         bool is_key_released(Key key) const;
     private:
+        friend ___Callback;
         void* _window;
-    public:
         float previous_cursor_x, previous_cursor_y;
         float current_cursor_x, current_cursor_y;
         bool previous_mouse_button_state[MAX_MOUSE_BUTTONS];

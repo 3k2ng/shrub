@@ -3,30 +3,32 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 namespace shrub {
-    static void _cursor_pos_callback(GLFWwindow *window_handle, double xpos, double ypos) {
-        Window* window_ptr = static_cast<Window*>(glfwGetWindowUserPointer(window_handle));
-        window_ptr->current_cursor_x = static_cast<float>(xpos);
-        window_ptr->current_cursor_y = static_cast<float>(ypos);
-    }
-    static void _mouse_button_callback(GLFWwindow *window_handle, int button, int action, int mods) {
-        Window* window_ptr = static_cast<Window*>(glfwGetWindowUserPointer(window_handle));
-        if (action == GLFW_RELEASE) window_ptr->current_mouse_button_state[button] = false;
-        else if (action == GLFW_PRESS) window_ptr->current_mouse_button_state[button] = true;
-        else if (action == GLFW_REPEAT) window_ptr->repeat_mouse_button_state[button] = true;
-    }
-    static void _key_callback(GLFWwindow *window_handle, int key, int scancode, int action, int mods) {
-        Window* window_ptr = static_cast<Window*>(glfwGetWindowUserPointer(window_handle));
-        if (action == GLFW_RELEASE) window_ptr->current_key_state[key] = false;
-        else if (action == GLFW_PRESS) window_ptr->current_key_state[key] = true;
-        else if (action == GLFW_REPEAT) window_ptr->repeat_key_state[key] = true;
-    }
+    struct ___Callback{
+        static void _cursor_pos_callback(GLFWwindow *window_handle, double xpos, double ypos) {
+            Window* window_ptr = static_cast<Window*>(glfwGetWindowUserPointer(window_handle));
+            window_ptr->current_cursor_x = static_cast<float>(xpos);
+            window_ptr->current_cursor_y = static_cast<float>(ypos);
+        }
+        static void _mouse_button_callback(GLFWwindow *window_handle, int button, int action, int mods) {
+            Window* window_ptr = static_cast<Window*>(glfwGetWindowUserPointer(window_handle));
+            if (action == GLFW_RELEASE) window_ptr->current_mouse_button_state[button] = false;
+            else if (action == GLFW_PRESS) window_ptr->current_mouse_button_state[button] = true;
+            else if (action == GLFW_REPEAT) window_ptr->repeat_mouse_button_state[button] = true;
+        }
+        static void _key_callback(GLFWwindow *window_handle, int key, int scancode, int action, int mods) {
+            Window* window_ptr = static_cast<Window*>(glfwGetWindowUserPointer(window_handle));
+            if (action == GLFW_RELEASE) window_ptr->current_key_state[key] = false;
+            else if (action == GLFW_PRESS) window_ptr->current_key_state[key] = true;
+            else if (action == GLFW_REPEAT) window_ptr->repeat_key_state[key] = true;
+        }
+    };
     Window::Window(int width, int height, const char* title) {
         Context::instance();
         _window = glfwCreateWindow(width, height, title, nullptr, nullptr);
         glfwSetWindowUserPointer(static_cast<GLFWwindow*>(_window), this);
-        glfwSetCursorPosCallback(static_cast<GLFWwindow*>(_window), _cursor_pos_callback);
-        glfwSetMouseButtonCallback(static_cast<GLFWwindow*>(_window), _mouse_button_callback);
-        glfwSetKeyCallback(static_cast<GLFWwindow*>(_window), _key_callback);
+        glfwSetCursorPosCallback(static_cast<GLFWwindow*>(_window), ___Callback::_cursor_pos_callback);
+        glfwSetMouseButtonCallback(static_cast<GLFWwindow*>(_window), ___Callback::_mouse_button_callback);
+        glfwSetKeyCallback(static_cast<GLFWwindow*>(_window), ___Callback::_key_callback);
         previous_cursor_x = 0.F; previous_cursor_y = 0.F;
         current_cursor_x = 0.F; current_cursor_y = 0.F;
         for (int i = 0; i < MAX_MOUSE_BUTTONS; ++i) {
