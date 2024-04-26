@@ -15,29 +15,22 @@ namespace shrub {
         void swap_buffers() const;
         void make_current() const;
         void poll_events();
-        float cursor_x() const;
-        float cursor_y() const;
-        float cursor_delta_x() const;
-        float cursor_delta_y() const;
-        bool is_mouse_button_down(MouseButton button) const;
-        bool is_mouse_button_repeated(MouseButton button) const;
-        bool is_mouse_button_pressed(MouseButton button) const;
-        bool is_mouse_button_released(MouseButton button) const;
-        bool is_key_down(Key key) const;
-        bool is_key_repeated(Key key) const;
-        bool is_key_pressed(Key key) const;
-        bool is_key_released(Key key) const;
+        float cursor_x() const { return _input.current_cursor_x; }
+        float cursor_y() const { return _input.current_cursor_y; }
+        float cursor_delta_x() const { return _input.current_cursor_x - _input.previous_cursor_x; };
+        float cursor_delta_y() const { return _input.current_cursor_y - _input.previous_cursor_y; };
+        bool is_mouse_button_down(MouseButton button) const { return _input.current_mouse_button_state[static_cast<int>(button)]; }
+        bool is_mouse_button_repeated(MouseButton button) const { return _input.repeat_mouse_button_state[static_cast<int>(button)]; }
+        bool is_mouse_button_pressed(MouseButton button) const { return !_input.previous_mouse_button_state[static_cast<int>(button)] && _input.current_mouse_button_state[static_cast<int>(button)]; }
+        bool is_mouse_button_released(MouseButton button) const { return _input.previous_mouse_button_state[static_cast<int>(button)] && !_input.current_mouse_button_state[static_cast<int>(button)]; }
+        bool is_key_down(Key key) const { return _input.current_key_state[static_cast<int>(key)]; }
+        bool is_key_repeated(Key key) const { return _input.repeat_key_state[static_cast<int>(key)]; }
+        bool is_key_pressed(Key key) const { return !_input.previous_key_state[static_cast<int>(key)] && _input.current_key_state[static_cast<int>(key)]; }
+        bool is_key_released(Key key) const { return _input.previous_key_state[static_cast<int>(key)] && !_input.current_key_state[static_cast<int>(key)]; }
     private:
         friend ___Callback;
         void* _window;
-        float previous_cursor_x, previous_cursor_y;
-        float current_cursor_x, current_cursor_y;
-        bool previous_mouse_button_state[MAX_MOUSE_BUTTONS];
-        bool current_mouse_button_state[MAX_MOUSE_BUTTONS];
-        bool repeat_mouse_button_state[MAX_MOUSE_BUTTONS];
-        bool previous_key_state[MAX_KEYS];
-        bool current_key_state[MAX_KEYS];
-        bool repeat_key_state[MAX_KEYS];
+        Input _input;
     };
 }
 #endif

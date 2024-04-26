@@ -1,7 +1,7 @@
 #ifndef SHRUB_INPUT_H_
 #define SHRUB_INPUT_H_
 namespace shrub {
-    constexpr int MAX_MOUSE_BUTTONS = 8;
+    constexpr int MAX_MOUSE_BUTTON = 8;
     enum class MouseButton {
         LEFT = 0,
         RIGHT = 1,
@@ -12,7 +12,7 @@ namespace shrub {
         EXTRA_3 = 6,
         EXTRA_4 = 7,
     };
-    constexpr int MAX_KEYS = 512;
+    constexpr int MAX_KEY = 512;
     enum class Key {
         SPACE = 32,
         APOSTROPHE = 39, /* ' */
@@ -134,6 +134,30 @@ namespace shrub {
         RIGHT_ALT = 346,
         RIGHT_SUPER = 347,
         MENU = 348,
+    };
+    struct Input {
+        Input() {
+            previous_cursor_x = 0.F; previous_cursor_y = 0.F;
+            current_cursor_x = 0.F; current_cursor_y = 0.F;
+            for (int i = 0; i < MAX_MOUSE_BUTTON; ++i) {
+                previous_mouse_button_state[i] = false;
+                current_mouse_button_state[i] = false;
+                repeat_mouse_button_state[i] = false;
+            }
+            for (int i = 0; i < MAX_KEY; ++i) {
+                previous_key_state[i] = false;
+                current_key_state[i] = false;
+                repeat_key_state[i] = false;
+            }
+        }
+        float previous_cursor_x, previous_cursor_y;
+        float current_cursor_x, current_cursor_y;
+        bool previous_mouse_button_state[MAX_MOUSE_BUTTON];
+        bool current_mouse_button_state[MAX_MOUSE_BUTTON];
+        bool repeat_mouse_button_state[MAX_MOUSE_BUTTON];
+        bool previous_key_state[MAX_KEY];
+        bool current_key_state[MAX_KEY];
+        bool repeat_key_state[MAX_KEY];
     };
 }
 #endif
