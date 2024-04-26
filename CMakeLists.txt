@@ -10,6 +10,7 @@ add_library(shrub
 target_include_directories(shrub
     PRIVATE "deps/glfw/include"
     PRIVATE "deps/stb"
+    PRIVATE "deps/miniaudio"
     PRIVATE "include"
 )
 target_link_libraries(shrub PRIVATE glfw)
