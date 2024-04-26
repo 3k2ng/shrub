@@ -17,9 +17,6 @@ namespace shrub {
     Context::~Context() {
         glfwTerminate();
     }
-    void Context::poll_events() {
-        glfwPollEvents();
-    }
     void Context::load_gl() {
         gladLoadGL(glfwGetProcAddress);
     }
