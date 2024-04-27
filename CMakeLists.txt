@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.8)
 project(shrub)
 add_subdirectory("deps/glfw")
 add_library(shrub 
@@ -14,3 +14,6 @@ target_include_directories(shrub
     PRIVATE "include"
 )
 target_link_libraries(shrub PRIVATE glfw)
+set_target_properties(shrub PROPERTIES CXX_STANDARD 17)
+set_target_properties(shrub PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(shrub PROPERTIES CXX_EXTENSIONS ON)
