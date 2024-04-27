@@ -1,5 +1,4 @@
-#ifndef TNGL_DEBUG_H_
-#define TNGL_DEBUG_H_
+#pragma once
 #include <glad/gl.h>
 #include <cstdio>
 namespace tngl {
@@ -33,4 +32,3 @@ namespace tngl {
 		} }(), id, message);
     }
 }
-#endif

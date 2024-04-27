@@ -1,5 +1,4 @@
-#ifndef TNGL_SHADER_H_
-#define TNGL_SHADER_H_
+#pragma once
 #include <glad/gl.h>
 namespace tngl {
     struct Shader {
@@ -78,4 +77,3 @@ namespace tngl {
         GLuint _program;
     };
 }
-#endif

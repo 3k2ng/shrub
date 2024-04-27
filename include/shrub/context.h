@@ -1,5 +1,4 @@
-#ifndef SHRUB_CONTEXT_H_
-#define SHRUB_CONTEXT_H_
+#pragma once
 namespace shrub {
     struct Context {
         static const Context &instance();
@@ -11,4 +10,3 @@ namespace shrub {
         ~Context();
     };
 }
-#endif

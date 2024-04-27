@@ -1,5 +1,4 @@
-#ifndef SHRUB_WINDOW_H_
-#define SHRUB_WINDOW_H_
+#pragma once
 #include "shrub/input.h"
 namespace shrub {
     struct ___Callback;
@@ -33,4 +32,3 @@ namespace shrub {
         Input _input;
     };
 }
-#endif

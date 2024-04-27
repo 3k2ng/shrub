@@ -1,9 +1,11 @@
-#ifndef TNGL_BUFFER_H_
-#define TNGL_BUFFER_H_
+#pragma once
 #include <glad/gl.h>
 namespace tngl {
     struct Buffer {
-        Buffer() { glCreateBuffers(1, &buffer); }
+        Buffer(GLsizeiptr size, const void *data, GLbitfield flags) {
+            glCreateBuffers(1, &buffer);
+            glNamedBufferStorage(buffer, size, data, flags);
+        }
         ~Buffer() { glDeleteBuffers(1, &buffer); }
         Buffer(const Buffer &) = delete;
         Buffer operator=(const Buffer &) = delete;
@@ -17,7 +19,6 @@ namespace tngl {
             return *this;
         }
         operator GLuint() const { return buffer; }
-        void storage(GLsizeiptr size, const void *data, GLbitfield flags) const { glNamedBufferStorage(buffer, size, data, flags); }
         void subdata(GLintptr offset, GLsizei size, const void *data) const { glNamedBufferSubData(buffer, offset, size, data); }
     private:
         GLuint buffer;
@@ -52,4 +53,3 @@ namespace tngl {
         GLuint _va;
     };
 }
-#endif

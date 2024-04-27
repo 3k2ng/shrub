@@ -1,5 +1,4 @@
-#ifndef SHRUB_BITMAP_H_
-#define SHRUB_BITMAP_H_
+#pragma once
 namespace shrub {
     struct Bitmap {
         static Bitmap from_file(const char *file_path);
@@ -15,4 +14,3 @@ namespace shrub {
         unsigned char *_bitmap;
     };
 }
-#endif

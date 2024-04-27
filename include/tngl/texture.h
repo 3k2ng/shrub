@@ -1,5 +1,4 @@
-#ifndef TNGL_TEXTURE_H_
-#define TNGL_TEXTURE_H_
+#pragma once
 #include <glad/gl.h>
 namespace tngl {
     struct Texture {
@@ -46,4 +45,3 @@ namespace tngl {
         GLuint _texture;
     };
 }
-#endif

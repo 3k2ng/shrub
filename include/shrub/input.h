@@ -1,5 +1,4 @@
-#ifndef SHRUB_INPUT_H_
-#define SHRUB_INPUT_H_
+#pragma once
 namespace shrub {
     constexpr int MAX_MOUSE_BUTTON = 8;
     enum class MouseButton {
@@ -160,4 +159,3 @@ namespace shrub {
         bool repeat_key_state[MAX_KEY];
     };
 }
-#endif

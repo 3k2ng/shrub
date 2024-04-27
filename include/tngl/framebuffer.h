@@ -1,5 +1,4 @@
-#ifndef TNGL_FRAMEBUFFER_H_
-#define TNGL_FRAMEBUFFER_H_
+#pragma once
 #include <glad/gl.h>
 namespace tngl {
     struct Renderbuffer {
@@ -50,4 +49,3 @@ namespace tngl {
         GLuint _framebuffer;
     };
 }
-#endif
