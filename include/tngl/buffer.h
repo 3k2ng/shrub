@@ -19,7 +19,6 @@ namespace tngl {
             return *this;
         }
         operator GLuint() const { return buffer; }
-        void subdata(GLintptr offset, GLsizei size, const void *data) const { glNamedBufferSubData(buffer, offset, size, data); }
     private:
         GLuint buffer;
     };
@@ -38,17 +37,6 @@ namespace tngl {
             return *this;
         }
         operator GLuint() const { return _va; }
-        void vertex_buffer(GLuint binding_idx, const Buffer &buffer, GLintptr offset, GLsizei stride) const {
-            glVertexArrayVertexBuffer(_va, binding_idx, buffer, offset, stride);
-        }
-        void element_buffer(const Buffer &buffer) const { glVertexArrayElementBuffer(_va, buffer); }
-        void enable_attrib(GLuint idx) const { glEnableVertexArrayAttrib(_va, idx); }
-        void disable_attrib(GLuint idx) const { glDisableVertexArrayAttrib(_va, idx); }
-        void attrib_format(GLuint attrib_idx, GLint size, GLenum type, bool normalized, GLuint relative_offset) const {
-            glVertexArrayAttribFormat(_va, attrib_idx, size, type, normalized ? GL_TRUE : GL_FALSE, relative_offset);
-        }
-        void attrib_binding(GLuint attrib_idx, GLuint binding_idx) const { glVertexArrayAttribBinding(_va, attrib_idx, binding_idx); }
-
     private:
         GLuint _va;
     };
