@@ -1,9 +1,12 @@
 #include "shrub/window.h"
-#include "shrub/context.h"
-#define GLFW_INCLUDE_NONE
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 namespace shrub {
-    struct ___Callback{
+    struct ___GlfwInit {
+        ___GlfwInit() { glfwInit(); }
+        ~___GlfwInit() { glfwTerminate(); }
+    };
+    struct ___Callback {
         static void _cursor_pos_callback(GLFWwindow *window_handle, double xpos, double ypos) {
             Window* window_ptr = static_cast<Window*>(glfwGetWindowUserPointer(window_handle));
             window_ptr->_input.current_cursor_x = static_cast<float>(xpos);
@@ -23,12 +26,17 @@ namespace shrub {
         }
     };
     Window::Window(int width, int height, const char* title) {
-        Context::instance();
+        static ___GlfwInit glfw_init;
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         _window = glfwCreateWindow(width, height, title, nullptr, nullptr);
         glfwSetWindowUserPointer(static_cast<GLFWwindow*>(_window), this);
         glfwSetCursorPosCallback(static_cast<GLFWwindow*>(_window), ___Callback::_cursor_pos_callback);
         glfwSetMouseButtonCallback(static_cast<GLFWwindow*>(_window), ___Callback::_mouse_button_callback);
         glfwSetKeyCallback(static_cast<GLFWwindow*>(_window), ___Callback::_key_callback);
+        glfwMakeContextCurrent(static_cast<GLFWwindow*>(_window));
+        gladLoadGL(glfwGetProcAddress);
     }
     Window::~Window() {
         glfwDestroyWindow(static_cast<GLFWwindow*>(_window));

@@ -3,7 +3,6 @@ project(shrub)
 add_subdirectory("deps/glfw")
 add_library(shrub 
     "src/glad_gl.c"
-    "src/shrub_context.cpp"
     "src/shrub_bitmap.cpp"
     "src/shrub_window.cpp"
 )
