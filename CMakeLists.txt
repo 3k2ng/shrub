@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.8)
 project(shrub)
 add_subdirectory("deps/glfw")
 add_library(shrub 
-    "src/glad/gl.c"
-    "src/shrub/context.cpp"
-    "src/shrub/bitmap.cpp"
-    "src/shrub/window.cpp"
+    "src/glad_gl.c"
+    "src/shrub_context.cpp"
+    "src/shrub_bitmap.cpp"
+    "src/shrub_window.cpp"
 )
 target_include_directories(shrub
     PRIVATE "deps/glfw/include"

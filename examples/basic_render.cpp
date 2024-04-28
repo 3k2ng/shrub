@@ -4,8 +4,6 @@
 #define GLAD_GL_IMPLEMENTATION
 #include <glad/gl.h>
 
-#include <tngl/texture.h>
-
 int main() {
 	shrub::Window window(800, 600, "basic render");
 	window.make_current();
